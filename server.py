@@ -74,16 +74,19 @@ def run_java(user_script, options_json_str):
         return json.dumps(err)
 
 
+ALLOWED_ORIGIN = os.environ.get("ALLOWED_ORIGIN", "https://java-tutor.pages.dev")
+
+
 @route("/exec_java")
 def exec_java():
-    response.set_header("Access-Control-Allow-Origin", "*")
+    response.set_header("Access-Control-Allow-Origin", ALLOWED_ORIGIN)
     response.content_type = "application/json"
     return run_java(request.query.user_script, request.query.options_json)
 
 
 @route("/exec_java_jsonp")
 def exec_java_jsonp():
-    response.set_header("Access-Control-Allow-Origin", "*")
+    response.set_header("Access-Control-Allow-Origin", ALLOWED_ORIGIN)
     callback = request.query.callback or "callback"
     trace_json = run_java(request.query.user_script, request.query.options_json)
     response.content_type = "application/javascript"
