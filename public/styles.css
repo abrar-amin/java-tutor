@@ -16,6 +16,18 @@
   z-index: 10;
 }
 
+#stack-section, #heap-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.section-label {
+  font-size: 13px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 6px;
+}
+
 #stack-container {
   width: 300px;
   min-height: 200px;
