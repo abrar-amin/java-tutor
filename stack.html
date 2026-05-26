@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="styles.css">
+  <title>Java Visualizer</title>
+</head>
+
+<body>
+  <div id="diagram">
+    <svg id="arrows" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+          <polygon points="0 0, 10 3.5, 0 7" fill="black" />
+        </marker>
+      </defs>
+    </svg>
+    <div id="stack-container"></div>
+    <div id="heap-container"></div>
+  </div>
+
+  <div id="stdout-container">
+    <div id="stdout-label">stdout</div>
+    <pre id="stdout-output"></pre>
+  </div>
+
+  <div id="controls">
+    <textarea id="code-input" rows="10" placeholder="Enter Java code here..."></textarea>
+    <div id="buttons">
+      <button onclick="run()">Run</button>
+      <button onclick="step(-1)" id="btn-prev" disabled>&#8592; Prev</button>
+      <button onclick="step(1)"  id="btn-next" disabled>Next &#8594;</button>
+      <span id="step-counter"></span>
+    </div>
+  </div>
+
+  <script>
+    // Override this with your backend URL when deploying
+    // window.BACKEND_URL = "https://your-oracle-vm-ip:4003";
+  </script>
+  <script src="visualize.js"></script>
+</body>
+</html>

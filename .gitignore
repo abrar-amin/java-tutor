@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+*.pyo
+
+.dockerignore
+
+.DS_Store
+.vscode/
+
+java_jail_cp/stdlibpack/
+
+java_jail_cp/**/*.class
+java_jail_cp/javax.json-1.0.jar

@@ -1,0 +1,197 @@
+#diagram {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  margin: 20px;
+}
+
+#arrows {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+  z-index: 10;
+}
+
+#stack-container {
+  width: 300px;
+  min-height: 200px;
+  border-left: 4px solid black;
+  border-right: 4px solid black;
+  border-bottom: 4px solid black;
+  padding: 0;
+  margin-left: 140px;
+  overflow: visible;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: stretch;
+  gap: 0;
+}
+
+.stack-row {
+  position: relative;
+}
+
+.side-text {
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  padding-right: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  white-space: nowrap;
+  text-align: right;
+}
+
+#heap-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 10px;
+  min-width: 120px;
+  margin-left: 80px;
+}
+
+.heap-entry {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+}
+
+.heap-type {
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.heap-object {
+  border: 2px solid black;
+  padding: 6px 10px;
+  font-size: 13px;
+  min-width: 80px;
+  min-height: 40px;
+  border-radius: 10px;
+}
+
+.array-row {
+  display: flex;
+  flex-direction: row;
+  border: 2px solid black;
+  width: fit-content;
+}
+
+.array-cell {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  border-right: 2px solid black;
+  flex-shrink: 0;
+}
+
+.array-cell:last-child {
+  border-right: none;
+}
+
+.array-empty {
+  padding: 4px 8px;
+  font-size: 11px;
+  color: #888;
+  font-style: italic;
+}
+
+.inner-box {
+  flex: 1;
+  border: 2px solid black;
+  padding: 6px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-height: 40px;
+}
+
+.var-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 13px;
+}
+
+.var-label {
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.var-value-box {
+  border: 2px solid black;
+  background: white;
+  width: 50px;
+  height: 24px;
+  text-align: center;
+  font-size: 13px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#stdout-container {
+  margin: 0 20px 10px 20px;
+  border: 2px solid black;
+  padding: 8px;
+  max-width: 660px;
+}
+
+#stdout-label {
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+#stdout-output {
+  margin: 0;
+  font-family: monospace;
+  font-size: 13px;
+  white-space: pre-wrap;
+  min-height: 20px;
+}
+
+#controls {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 20px;
+}
+
+#code-input {
+  width: 600px;
+  font-family: monospace;
+  font-size: 13px;
+  padding: 8px;
+  border: 2px solid black;
+  resize: vertical;
+}
+
+#buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+button {
+  padding: 4px 12px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+#step-counter {
+  font-size: 13px;
+}
