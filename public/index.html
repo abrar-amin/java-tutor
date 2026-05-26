@@ -7,6 +7,10 @@
 </head>
 
 <body>
+  <div id="diagram-labels">
+    <div id="stack-label">Runtime Stack</div>
+    <div id="heap-label">Memory Heap</div>
+  </div>
   <div id="diagram">
     <svg id="arrows" xmlns="http://www.w3.org/2000/svg">
       <defs>
@@ -15,14 +19,8 @@
         </marker>
       </defs>
     </svg>
-    <div id="stack-section">
-      <div class="section-label">Runtime Stack</div>
-      <div id="stack-container"></div>
-    </div>
-    <div id="heap-section">
-      <div class="section-label">Memory Heap</div>
-      <div id="heap-container"></div>
-    </div>
+    <div id="stack-container"></div>
+    <div id="heap-container"></div>
   </div>
 
   <div id="stdout-container">
@@ -31,7 +29,23 @@
   </div>
 
   <div id="controls">
-    <textarea id="code-input" rows="10" placeholder="Enter Java code here..."></textarea>
+    <textarea id="code-input" rows="10">public class Example {
+    int value;
+
+    public Example(int value) {
+        this.value = value;
+    }
+
+    public static int sum(int a, int b) {
+        int result = a + b;
+        return result;
+    }
+
+    public static void main(String[] args) {
+        Example obj = new Example(42);
+        int total = sum(3, 7);
+    }
+}</textarea>
     <div id="buttons">
       <button onclick="run()">Run</button>
       <button onclick="step(-1)" id="btn-prev" disabled>&#8592; Prev</button>
