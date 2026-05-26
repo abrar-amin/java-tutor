@@ -183,6 +183,8 @@ async function run() {
         const res = await fetch(`${BACKEND_URL}/exec_java?` + params);
         if (!res.ok) throw new Error('HTTP ' + res.status);
         const data = await res.json();
+        const errorStep = data['trace']?.find(s => s['event'] === 'uncaught_exception');
+        if (errorStep) { alert(errorStep['exception_msg'] ?? 'An error occurred.'); return; }
         trace = data['trace'].filter(s => s['event'] !== 'return' && s['event'] !== 'call');
         let lastNonEmptyStackDepth = 0;
         trace = trace.filter(s => {
@@ -201,6 +203,6 @@ async function run() {
 
         renderStep(0);
     } catch (e) {
-        console.error(e);
+        alert(e.message ?? 'Could not connect to the backend.');
     }
 }
