@@ -3,23 +3,34 @@ const BACKEND_URL = window.BACKEND_URL ?? "https://java-tutor-api.abraramin.dev"
 let trace = [];
 let currentStep = 0;
 
+function offsetFrom(el, ancestor) {
+    let x = 0, y = 0;
+    let cur = el;
+    while (cur && cur !== ancestor) {
+        x += cur.offsetLeft;
+        y += cur.offsetTop;
+        cur = cur.offsetParent;
+    }
+    return { x, y, w: el.offsetWidth, h: el.offsetHeight };
+}
+
 function drawArrows() {
     const svg = document.getElementById("arrows");
     [...svg.children].forEach(c => { if (c.tagName !== "defs") c.remove(); });
 
-    const vizRect = document.getElementById("diagram").getBoundingClientRect();
+    const diagram = document.getElementById("diagram");
 
     document.querySelectorAll("[data-ref-id]").forEach(valBox => {
         const heapObj = document.querySelector(`[data-heap-id="${valBox.dataset.refId}"]`);
         if (!heapObj) return;
 
-        const from = valBox.getBoundingClientRect();
-        const to   = heapObj.getBoundingClientRect();
+        const from = offsetFrom(valBox, diagram);
+        const to   = offsetFrom(heapObj, diagram);
 
-        const x1 = from.left + from.width / 2 - vizRect.left;
-        const y1 = from.top  + from.height / 2 - vizRect.top;
-        const x2 = to.left   - vizRect.left;
-        const y2 = to.top    + to.height / 2 - vizRect.top;
+        const x1 = from.x + from.w / 2;
+        const y1 = from.y + from.h / 2;
+        const x2 = to.x;
+        const y2 = to.y + to.h / 2;
 
         const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
         path.setAttribute("d", `M ${x1} ${y1} L ${x2} ${y2}`);
@@ -30,6 +41,9 @@ function drawArrows() {
         svg.appendChild(path);
     });
 }
+
+new ResizeObserver(() => { if (trace.length) drawArrows(); })
+    .observe(document.getElementById("diagram"));
 
 function renderStep(i) {
     const step = trace[i];
