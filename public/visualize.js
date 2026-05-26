@@ -1,4 +1,4 @@
-const BACKEND_URL = window.BACKEND_URL ?? "http://localhost:4003";
+const BACKEND_URL = window.BACKEND_URL ?? "http://35.254.191.33:4003";
 
 let trace = [];
 let currentStep = 0;
