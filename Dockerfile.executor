@@ -1,0 +1,16 @@
+FROM eclipse-temurin:21-jdk
+
+RUN apt-get update && apt-get install -y make curl && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+COPY java_jail_cp ./java_jail_cp
+RUN curl -fsSL https://repo1.maven.org/maven2/org/glassfish/javax.json/1.0/javax.json-1.0.jar \
+    -o java_jail_cp/javax.json-1.0.jar
+RUN make -C java_jail_cp
+
+RUN useradd -r -s /bin/false appuser && chown -R appuser /app
+USER appuser
+
+CMD ["java", \
+     "-cp", "/app/java_jail_cp:/app/java_jail_cp/javax.json-1.0.jar:/app/java_jail_cp/visualizer-stdlib", \
+     "traceprinter.InMemory"]

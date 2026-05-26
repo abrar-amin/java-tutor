@@ -37,6 +37,7 @@ CLASSPATH = ":".join([
 ])
 
 TIMEOUT_SECS = 15
+EXECUTOR_IMAGE = os.environ.get("EXECUTOR_IMAGE")
 
 
 def run_java(user_script, options_json_str):
@@ -56,8 +57,22 @@ def run_java(user_script, options_json_str):
     input_obj["options"]["showStringsAsValues"] = False
 
     try:
+        if EXECUTOR_IMAGE:
+            cmd = [
+                "docker", "run", "--rm", "-i",
+                "--network=none",
+                "--memory=256m",
+                "--cpus=0.5",
+                "--pids-limit=64",
+                "--read-only",
+                "--tmpfs=/tmp",
+                EXECUTOR_IMAGE,
+            ]
+        else:
+            cmd = ["java", "-cp", CLASSPATH, "traceprinter.InMemory"]
+
         result = subprocess.run(
-            ["java", "-cp", CLASSPATH, "traceprinter.InMemory"],
+            cmd,
             input=json.dumps(input_obj),
             capture_output=True,
             text=True,
